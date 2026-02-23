@@ -23,7 +23,6 @@ services:
       - .env
     ports:
       - "${DB_PORT:-5432}:${DB_PORT:-5432}"
-"
     volumes:
       - /mnt/alexandria:/var/lib/postgresql/data
       - ./internal/init.sql:/docker-entrypoint-initdb.d/init.sql
