@@ -1,12 +1,14 @@
 services:
   api:
     build: .
-    # user: "${APP_UID:-103}:${APP_GID:-112}"
+    user: "${APP_UID:-103}:${APP_GID:-112}"
     ports:
       - "${PORT:-8080}:${PORT:-8080}"
     container_name: alexandria
     env_file:
       - .env
+    volumes:
+      - /mnt/alexandria/data:/data
     depends_on:
       postgres:
         condition: service_healthy

@@ -21,6 +21,16 @@ func main(){
         port = "8080"
 	}
 
+	// myString := "Hello World!"
+	//
+	// bytes := []byte(myString)
+	// err := os.WriteFile("/data/myfile.txt", bytes, 0666)
+	//
+	// if err != nil {
+	// 	panic("Failed to write file")
+	// }
+	//
+	// log.Printf("File created successfully!")
 	http.ListenAndServe(":"+port, router)
 }
 

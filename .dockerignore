@@ -1,0 +1,6 @@
+postgre_data/
+.git
+node_modules
+README.md
+.env
+*.log
