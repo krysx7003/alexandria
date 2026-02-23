@@ -24,7 +24,7 @@ services:
     ports:
       - "${DB_PORT:-5432}:${DB_PORT:-5432}"
     volumes:
-      - /mnt/alexandria:/var/lib/postgresql/data
+      - /mnt/alexandria:/var/lib/postgresql
       - ./internal/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
