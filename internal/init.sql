@@ -1,14 +1,14 @@
 CREATE TABLE IF NOT EXISTS "isbns" (
   "id" SERIAL PRIMARY KEY,
-  "v10" "VARCHAR(20)",
-  "v13" "VARCHAR(20)",
+  "v10" VARCHAR(20),
+  "v13" VARCHAR(20),
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP)
 );
 
 CREATE TABLE IF NOT EXISTS "series" (
   "id" SERIAL PRIMARY KEY,
-  "name" "VARCHAR(255)" NOT NULL,
+  "name" VARCHAR(255) NOT NULL,
   "ongoing" BOOLEAN DEFAULT true,
   "total_books" INTEGER,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS "series" (
 
 CREATE TABLE IF NOT EXISTS "books" (
   "id" SERIAL PRIMARY KEY,
-  "title" "VARCHAR(500)" NOT NULL,
+  "title" VARCHAR(500) NOT NULL,
   "series_id" INTEGER,
   "book_in_series" INTEGER,
-  "publisher" "VARCHAR(255)",
+  "publisher" VARCHAR(255),
   "publish_date" DATE,
   "cover_url" TEXT,
   "media_url" TEXT,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "books" (
 
 CREATE TABLE IF NOT EXISTS "genres" (
   "id" SERIAL PRIMARY KEY,
-  "name" "VARCHAR(255)" NOT NULL,
+  "name" VARCHAR(255) NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP)
 );
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS "books_genres" (
 
 CREATE TABLE IF NOT EXISTS "authors" (
   "id" SERIAL PRIMARY KEY,
-  "name" "VARCHAR(255)" NOT NULL,
+  "name" VARCHAR(255) NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP)
 );
