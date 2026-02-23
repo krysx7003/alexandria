@@ -3,6 +3,38 @@ version: '3.8'
 services:
   api:
     build: .
+    user: "${APP_UID:-103}:${APP_GID:-112}"
     ports:
-      - "8080:8080"
+      - "${PORT:-8080}:${PORT:-8080}"
     container_name: alexandria
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    user: "${APP_UID:-103}:${APP_GID:-112}"
+    env_file:
+      - .env
+    ports:
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+"
+    volumes:
+      - /mnt/alexandria:/var/lib/postgresql/data
+      - ./internal/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge

@@ -17,10 +17,21 @@ func NewBookHandler() *BookHandler {
 }
 
 func (h *BookHandler) GetBooks(w http.ResponseWriter, r *http.Request) {
-    // In real app, fetch from database
+
+	series := models.Series{Name: "He Who Fights with Monsters", Book: 10, Ongoing: true}
+	authors := []models.Author{
+		{Name: "Shirtaloon"},
+		{Name: "Travis Deverell"},
+	}
+	genres := []models.Genre{
+		{Name: "LitRPG"},
+		{Name: "Fantasy"},
+		{Name: "Adventure"},
+	}
+	
     books := []models.Book{
-        {ID: "1", Title: "Book 1", Author: "Author 1", Year: "2023"},
-        {ID: "2", Title: "Book 2", Author: "Author 2", Year: "2024"},
+		{ID: "1", Title: "Book 10", Series: series, Genres: genres, Authors: authors, Publisher: "Aethon Books"},
+		{ID: "2", Title: "Book 11", Series: series, Genres: genres, Authors: authors, Publisher: "Aethon Books"},
     }
     
     w.Header().Set("Content-Type", "application/json")
@@ -30,15 +41,27 @@ func (h *BookHandler) GetBooks(w http.ResponseWriter, r *http.Request) {
 func (h *BookHandler) GetBook(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     id := vars["id"]
+
+	series := models.Series{Name: "He Who Fights with Monsters", Book: 10, Ongoing: true}
+	authors := []models.Author{
+		{Name: "Shirtaloon"},
+		{Name: "Travis Deverell"},
+	}
+	genres := []models.Genre{
+		{Name: "LitRPG"},
+		{Name: "Fantasy"},
+		{Name: "Adventure"},
+	}
     
     // Fetch book by ID
     book := models.Book{
-        ID:     id,
-        Title:  "Chuj",
-        Author: "Test",
-        Year:   "2137",
-    }
-    
+		ID: id,
+		Title: "Book 10",
+		Series: series,
+		Genres: genres,
+		Authors: authors,
+		Publisher: "Aethon Books",
+	}    
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(book)
 }
